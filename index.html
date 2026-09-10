@@ -1,0 +1,586 @@
+<title>Sampa a Pé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#EDEAE4;
+    --bg-raised:#F7F5F0;
+    --ink:#201C1A;
+    --muted:#726A5E;
+    --line:#DAD2C3;
+    --accent:#5A3FA6;
+    --accent-ink:#FBFAF7;
+    --accent-tint:#E8E1F6;
+    --brick:#A94F2B;
+    --shadow: 0 1px 0 rgba(32,28,26,.06);
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --display: "Bricolage Grotesque", "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#17140F;
+      --bg-raised:#211C15;
+      --ink:#ECE6D9;
+      --muted:#A79A85;
+      --line:#382F22;
+      --accent:#A791E0;
+      --accent-ink:#17140F;
+      --accent-tint:#2B2440;
+      --brick:#D3805A;
+      --shadow: 0 1px 0 rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17140F;
+    --bg-raised:#211C15;
+    --ink:#ECE6D9;
+    --muted:#A79A85;
+    --line:#382F22;
+    --accent:#A791E0;
+    --accent-ink:#17140F;
+    --accent-tint:#2B2440;
+    --brick:#D3805A;
+    --shadow: 0 1px 0 rgba(0,0,0,.3);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.55;
+    padding-inline:20px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:700;
+    text-wrap:balance;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin-inline:auto;}
+  .prose{max-width:62ch;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:.5em; height:.5em;
+    border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:14px;
+    gap:16px;
+  }
+  .wordmark{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:1.15rem;
+    letter-spacing:-0.02em;
+    white-space:nowrap;
+  }
+  .wordmark span{color:var(--accent);}
+  nav.links{
+    display:flex; gap:22px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  nav.links a{
+    text-decoration:none;
+    color:var(--muted);
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+  }
+  nav.links a:hover, nav.links a:focus-visible{color:var(--ink); border-color:var(--accent);}
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    background:var(--accent);
+    color:var(--accent-ink);
+    padding:9px 16px;
+    border-radius:3px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:640px){ nav.links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:56px 44px; border-bottom:1px solid var(--line);}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+    align-items:end;
+  }
+  @media (max-width:760px){ .hero-grid{grid-template-columns:1fr;} }
+  h1.headline{
+    font-size:clamp(2.3rem, 5.4vw, 4rem);
+    line-height:1.02;
+    margin-top:14px;
+  }
+  h1.headline em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero-sub{
+    color:var(--muted);
+    margin-top:18px;
+    max-width:46ch;
+  }
+  .hero-actions{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:3px;
+    display:inline-block;
+  }
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  .stat-panel{
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 16px;
+  }
+  .stat b{
+    display:block;
+    font-family:var(--mono);
+    font-size:1.5rem;
+    font-variant-numeric:tabular-nums;
+    color:var(--ink);
+  }
+  .stat span{
+    font-size:0.74rem;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding-block:52px; border-bottom:1px solid var(--line);}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:20px; margin-bottom:36px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(1.6rem, 3.4vw, 2.3rem);}
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .fact-list{list-style:none; margin:0; padding:0; display:grid; gap:14px;}
+  .fact-list li{
+    display:grid; grid-template-columns:auto 1fr; gap:14px;
+    padding-block:14px;
+    border-top:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .fact-list li:first-child{border-top:none;}
+  .fact-list b{
+    font-family:var(--mono); font-weight:500; color:var(--muted);
+    font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;
+    white-space:nowrap;
+  }
+
+  /* ---------- routes ---------- */
+  .route{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:0 26px;
+  }
+  .route-row{display:contents;}
+  .route-num-col{
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .route-dot{
+    width:40px; height:40px; border-radius:50%;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:0.85rem; color:var(--accent);
+    flex-shrink:0;
+  }
+  .route-line{
+    width:1px; flex:1;
+    background:var(--line);
+    margin-block:6px;
+  }
+  .route-row:last-child .route-line{display:none;}
+  .route-body{padding-bottom:40px;}
+  .route-row:last-child .route-body{padding-bottom:0;}
+
+  .route-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;
+    margin-bottom:8px;
+  }
+  .route-head h3{font-size:1.3rem;}
+  .route-hood{
+    font-family:var(--mono); font-size:0.76rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .route-desc{color:var(--muted); max-width:58ch; margin-top:6px;}
+  .route-stops{
+    margin:14px 0 0; padding:0; list-style:none;
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .route-stops li{
+    font-size:0.82rem;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:999px;
+    color:var(--ink);
+  }
+  .route-meta{
+    display:flex; gap:18px; flex-wrap:wrap;
+    margin-top:16px;
+    font-family:var(--mono); font-size:0.8rem;
+    color:var(--muted);
+    font-variant-numeric:tabular-nums;
+  }
+  .route-meta strong{color:var(--ink); font-weight:500;}
+  .route-price{
+    font-family:var(--mono);
+    color:var(--brick);
+    font-weight:500;
+  }
+
+  /* ---------- how it works ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  @media (max-width:700px){ .steps{grid-template-columns:1fr 1fr;} }
+  .step{
+    background:var(--bg-raised);
+    padding:22px 18px;
+  }
+  .step .eyebrow{margin-bottom:10px;}
+  .step p{margin:0; color:var(--muted); font-size:0.92rem;}
+
+  /* ---------- testimonials ---------- */
+  .quotes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+  }
+  @media (max-width:760px){ .quotes{grid-template-columns:1fr;} }
+  blockquote{
+    margin:0; padding-left:16px;
+    border-left:2px solid var(--accent);
+  }
+  blockquote p{margin:0 0 12px; font-size:1.02rem;}
+  blockquote cite{
+    font-style:normal; font-family:var(--mono);
+    font-size:0.76rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+
+  /* ---------- booking ---------- */
+  .book-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:760px){ .book-grid{grid-template-columns:1fr;} }
+  .price-table{width:100%; border-collapse:collapse; font-size:0.92rem;}
+  .price-table th{
+    text-align:left; font-family:var(--mono); font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--muted);
+    padding-bottom:10px; border-bottom:1px solid var(--line); font-weight:500;
+  }
+  .price-table td{
+    padding-block:12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  .price-table td:last-child{
+    font-family:var(--mono); text-align:right;
+    font-variant-numeric:tabular-nums; color:var(--brick); white-space:nowrap;
+  }
+  .contact-card{
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:28px;
+  }
+  .contact-card h3{font-size:1.2rem; margin-bottom:14px;}
+  .contact-row{
+    display:flex; justify-content:space-between; gap:12px;
+    padding-block:12px;
+    border-top:1px solid var(--line);
+    font-size:0.92rem;
+  }
+  .contact-row:first-of-type{border-top:none;}
+  .contact-row span:first-child{color:var(--muted);}
+  .contact-row a{text-decoration:underline; text-decoration-color:var(--line);}
+  .contact-card .btn{width:100%; text-align:center; margin-top:18px;}
+
+  /* ---------- footer ---------- */
+  footer{padding-block:32px 60px;}
+  .foot-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    font-size:0.82rem; color:var(--muted);
+  }
+  footer .wordmark{font-size:0.95rem;}
+</style>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="wordmark">SAMPA <span>A PÉ</span></div>
+    <nav class="links">
+      <a href="#rotas">Rotas</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#reservar">Reservar</a>
+    </nav>
+    <a class="nav-cta" href="#reservar">Reservar</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Guided walks · São Paulo</span>
+      <h1 class="headline">The city on foot,<br>one <em>bairro</em> at a time.</h1>
+      <p class="hero-sub">Four small-group routes through São Paulo's center, street art, and food markets — led by guides who live in the neighborhoods you're walking through. Rain or shine; the afternoon showers are part of the deal.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#rotas">See the routes</a>
+        <a class="btn btn-ghost" href="#reservar">Book a walk</a>
+      </div>
+    </div>
+    <div class="stat-panel">
+      <div class="stat"><b>4</b><span>routes on foot</span></div>
+      <div class="stat"><b>2.6km</b><span>average distance</span></div>
+      <div class="stat"><b>8</b><span>guests per group, max</span></div>
+      <div class="stat"><b>R$100–140</b><span>per person</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap about-grid">
+    <div class="prose">
+      <span class="eyebrow">About the walks</span>
+      <h2 style="margin-top:14px;">Sampa doesn't show up on a bus tour.</h2>
+      <p style="color:var(--muted); margin-top:16px;">São Paulo rewards people who slow down — the mortadella queue at the Mercadão, the alley that gets repainted every month in Vila Madalena, the jacarandás that turn Avenida Paulista violet for three weeks every August. We built four routes around those details, each led by a guide who walks that neighborhood on their own time, not just on tour days.</p>
+      <p style="color:var(--muted); margin-top:14px;">Groups stay small on purpose — eight people, one guide, no headsets. Everything is on foot at a conversational pace, with stops built in for the market stalls, the viewpoints, and the inevitable coffee.</p>
+    </div>
+    <ul class="fact-list">
+      <li><b>Group size</b><span>Max 8 guests, 1 guide. Private walks available for larger groups.</span></li>
+      <li><b>Languages</b><span>Portuguese, English, and Spanish — guide assigned when you book.</span></li>
+      <li><b>Weather</b><span>Walks run rain or shine. Guides carry ponchos; you should bring shoes you don't mind getting wet.</span></li>
+      <li><b>Pace</b><span>2–3.2km, mostly flat, with seated stops roughly every 45 minutes.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="rotas">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The routes</span>
+        <h2 style="margin-top:14px;">Four ways to cross the city.</h2>
+      </div>
+      <p class="prose" style="color:var(--muted); margin:0;">Every route is walked in this order, stop by stop — the sequence is the point.</p>
+    </div>
+
+    <div class="route">
+
+      <div class="route-row">
+        <div class="route-num-col"><div class="route-dot">01</div><div class="route-line"></div></div>
+        <div class="route-body">
+          <div class="route-head"><h3>Centro Histórico</h3><span class="route-hood">Sé · República</span></div>
+          <p class="route-desc">The oldest square in the city to the market that feeds it — colonial core, cathedral, and Oscar Niemeyer's curved concrete along the way.</p>
+          <ul class="route-stops">
+            <li>Pátio do Colégio</li>
+            <li>Catedral da Sé</li>
+            <li>Mercado Municipal (mortadella stop)</li>
+            <li>Edifício Copan</li>
+          </ul>
+          <div class="route-meta">
+            <span>Meets <strong>09:00</strong>, Pátio do Colégio</span>
+            <span><strong>3.2km</strong> · 2h30</span>
+          </div>
+          <div class="route-meta"><span class="route-price">R$120 / person</span></div>
+        </div>
+      </div>
+
+      <div class="route-row">
+        <div class="route-num-col"><div class="route-dot">02</div><div class="route-line"></div></div>
+        <div class="route-body">
+          <div class="route-head"><h3>Beco do Batman &amp; Vila Madalena</h3><span class="route-hood">Vila Madalena</span></div>
+          <p class="route-desc">A graffiti alley that never looks the same twice, then the bars and bookshops of Vila Madalena as the sun drops.</p>
+          <ul class="route-stops">
+            <li>Beco do Batman</li>
+            <li>Rua Aspicuelta</li>
+            <li>Largo da Batata</li>
+          </ul>
+          <div class="route-meta">
+            <span>Meets <strong>14:00</strong>, Vila Madalena station</span>
+            <span><strong>2.0km</strong> · 2h</span>
+          </div>
+          <div class="route-meta"><span class="route-price">R$110 / person</span></div>
+        </div>
+      </div>
+
+      <div class="route-row">
+        <div class="route-num-col"><div class="route-dot">03</div><div class="route-line"></div></div>
+        <div class="route-body">
+          <div class="route-head"><h3>Avenida Paulista &amp; MASP</h3><span class="route-hood">Bela Vista</span></div>
+          <p class="route-desc">The financial spine of the city, a glass-and-red-concrete museum, and a pocket park that used to be a private garden.</p>
+          <ul class="route-stops">
+            <li>MASP</li>
+            <li>Parque Trianon</li>
+            <li>Casa das Rosas</li>
+            <li>Conjunto Nacional</li>
+          </ul>
+          <div class="route-meta">
+            <span>Meets <strong>10:00</strong>, MASP-Trianon station</span>
+            <span><strong>2.5km</strong> · 2h</span>
+          </div>
+          <div class="route-meta"><span class="route-price">R$100 / person</span></div>
+        </div>
+      </div>
+
+      <div class="route-row">
+        <div class="route-num-col"><div class="route-dot">04</div></div>
+        <div class="route-body">
+          <div class="route-head"><h3>Liberdade Food Walk</h3><span class="route-hood">Liberdade</span></div>
+          <p class="route-desc">São Paulo's Japantown, block by block, with four tastings built into the route — this one ends with your hands full.</p>
+          <ul class="route-stops">
+            <li>Praça da Liberdade</li>
+            <li>Feira da Liberdade</li>
+            <li>Rua Galvão Bueno</li>
+            <li>4 tastings included</li>
+          </ul>
+          <div class="route-meta">
+            <span>Meets <strong>11:00</strong>, Liberdade station</span>
+            <span><strong>1.8km</strong> · 2h</span>
+          </div>
+          <div class="route-meta"><span class="route-price">R$140 / person</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2 style="margin-top:14px; margin-bottom:28px;">Meet, walk, taste, finish.</h2>
+    <div class="steps">
+      <div class="step"><span class="eyebrow">Meet</span><p>Show up at the meeting point on the route page. Your guide holds a small SAMPA A PÉ sign — no app to download.</p></div>
+      <div class="step"><span class="eyebrow">Walk</span><p>A conversational pace with stops for stories, photos, and the occasional queue for a sandwich.</p></div>
+      <div class="step"><span class="eyebrow">Taste</span><p>Market and food routes include tastings in the price — everything else is bring-your-own appetite.</p></div>
+      <div class="step"><span class="eyebrow">Finish</span><p>Routes end near a metro station, so getting to your next stop in the city is a short ride away.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos">
+  <div class="wrap">
+    <span class="eyebrow">Depoimentos</span>
+    <h2 style="margin-top:14px; margin-bottom:32px;">What the last few groups said.</h2>
+    <div class="quotes">
+      <blockquote>
+        <p>Our guide knew which wall in Beco do Batman gets repainted every month — we went back the next week and half of it had changed.</p>
+        <cite>Lucía · Buenos Aires</cite>
+      </blockquote>
+      <blockquote>
+        <p>Ended the Centro walk holding a mortadella sandwich the size of my forearm. Worth the queue at the Mercadão.</p>
+        <cite>Tom · Leeds</cite>
+      </blockquote>
+      <blockquote>
+        <p>Four hours felt like twenty minutes. We didn't check a map once, and I still think about the tastings in Liberdade.</p>
+        <cite>Aiko · Osaka</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="reservar" style="border-bottom:none;">
+  <div class="wrap book-grid">
+    <div>
+      <span class="eyebrow">Reservar</span>
+      <h2 style="margin-top:14px; margin-bottom:24px;">Prices at a glance.</h2>
+      <table class="price-table">
+        <thead><tr><th>Route</th><th>Length</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Centro Histórico</td><td>2h30 · 3.2km</td><td>R$120</td></tr>
+          <tr><td>Beco do Batman &amp; Vila Madalena</td><td>2h · 2.0km</td><td>R$110</td></tr>
+          <tr><td>Avenida Paulista &amp; MASP</td><td>2h · 2.5km</td><td>R$100</td></tr>
+          <tr><td>Liberdade Food Walk</td><td>2h · 1.8km</td><td>R$140</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--muted); font-size:0.88rem; margin-top:16px;">Private walks for groups of 9 or more, and custom routes for repeat visitors, quoted on request.</p>
+    </div>
+    <div class="contact-card">
+      <h3>Book a walk</h3>
+      <div class="contact-row"><span>Email</span><a href="mailto:ola@sampaape.com.br">ola@sampaape.com.br</a></div>
+      <div class="contact-row"><span>WhatsApp</span><a href="https://wa.me/5511987654321">+55 11 98765-4321</a></div>
+      <div class="contact-row"><span>Meeting points</span><span>Confirmed by guide, morning of</span></div>
+      <div class="contact-row"><span>Cancellation</span><span>Free up to 24h before</span></div>
+      <a class="btn btn-primary" href="mailto:ola@sampaape.com.br?subject=Booking%20a%20walk">Email to reserve a spot</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="wordmark">SAMPA <span style="color:var(--accent);">A PÉ</span></div>
+    <span>Walks depart daily, weather permitting · São Paulo, Brazil</span>
+  </div>
+</footer>
